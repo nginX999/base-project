@@ -1,0 +1,139 @@
+/* СТРАНИЦА ПРОЕКТОВ */
+/* Добавьте в существующие стили */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    flex: 1; /* Контейнер растягивается */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* Контент занимает все пространство */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.footer {
+    background-color: #868787;
+    color: aliceblue;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 4px solid #868787;
+
+    height: 75px;
+
+    background-color: #868787;
+}
+
+.header__image {
+    width: 100px;
+    height: 100px;
+}
+
+.header__text {
+    font-size: 24px;
+    color: aliceblue;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;      /* центрируем навигацию */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+
+.nav__list {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+}
+
+.nav__item {
+    font-size: 16px;
+}
+
+.nav__link {
+    text-decoration: none;
+    display: block;
+    padding: 10px 32px 10px 32px;
+    transition: all 0.2s ease;
+    font-weight: 700;
+    color:black !important;
+}
+
+.nav__link--active {
+    color: #fff !important; 
+    background-color: #62b4de;
+}
+
+.nav__link:hover {
+    color: #ffffff !important;
+    background-color: #62b4de;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%; /* важно */
+}
+
+.contact-me {
+    margin: 40px 0px 0px 0px;
+    border: 2px solid #ececec;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+}
+
+.contact-me__input {
+    margin: 5px 0px 0px 3px;
+    border-radius: 5px;
+    border: none;
+    background-color: #cacaca;
+    padding: 3px;
+} 
+
+.contact-me__button {
+    padding: 3px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0px 0px 0px;
+    background-color: #62b4de;
+    color: #fff;
+}
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px 0px 0px;
+}
+
+.contacts {
+    display: inline-block;
+    border: 2px solid #ececec;
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    padding: 30px;
+    margin: 40px 0px 0px 0px;
+}
