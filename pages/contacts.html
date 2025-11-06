@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
+    <link rel="stylesheet" href="../styles/default_styles/font.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
+</head>
+<body>
+    <div class="container">
+
+        <header class="header">
+            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" alt="" class="header__image">
+            <h1 class="header__text">Дзигоев Давид Георгиевич</h1>
+        </header>
+
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="../index.html" class="nav__link">Главная</a></li>
+                <li class="nav__item"><a href="../pages/projects.html" class="nav__link">Проекты</a></li>
+                <li class="nav__item"><a href="../pages/diary.html" class="nav__link">Дневник</a></li>
+                <li class="nav__item"><a href="../pages/contacts.html" class="nav__link nav__link--active">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+
+            <section class="contact-me">
+                <h2 class="contact-me__title">Свяжитесь со мной</h2>
+                <form action="/submit" method="post" class="contact-me__form">
+                    <label for="name">Имя:</label>
+                    <input type="text" name="name" class="contact-me__input" placeholder="Введите Ваше имя...">
+                </form>
+                <form action="/submit" method="post" class="contact-me__form">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" class="contact-me__input" placeholder="Введите Ваш Email...">
+                </form>
+                <form action="/submit" method="post" class="contact-me__form textarea">
+                    <label for="textarea">Сообщение:</label>
+                    <textarea name="message" id="message"></textarea>
+                </form>
+                <button class="contact-me__button">Отправить сообщение</button>
+            </section>
+
+            <section class="contacts">
+                <h2 class="contacts__title">Контакты:</h2>
+                <div class="contacts__mail">dzigoev.d.g@edu.ru</div>
+                <div class="contacts__github">Github: @nginX999</div>
+                <div class="contacts__city">Москва, Россия</div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            &copy;2025 Контакты
+        </footer>
+    </div>
+</body>
+</html>

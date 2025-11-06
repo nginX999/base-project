@@ -1,0 +1,167 @@
+/* СТРАНИЦА ПРОЕКТОВ */
+/* Добавьте в существующие стили */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    flex: 1; /* Контейнер растягивается */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* Контент занимает все пространство */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.footer {
+    background-color: #868787;
+    color: aliceblue;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 4px solid #868787;
+
+    height: 75px;
+
+    background-color: #868787;
+}
+
+.header__image {
+    width: 100px;
+    height: 100px;
+}
+
+.header__text {
+    font-size: 24px;
+    color: aliceblue;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;      /* центрируем навигацию */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+
+.nav__list {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+}
+
+.nav__item {
+    font-size: 16px;
+}
+
+.nav__link {
+    text-decoration: none;
+    display: block;
+    padding: 10px 32px 10px 32px;
+    transition: all 0.2s ease;
+    font-weight: 700;
+    color:black !important;
+}
+
+.nav__link--active {
+    color: #fff !important; 
+    background-color: #62b4de;
+}
+
+.nav__link:hover {
+    color: #ffffff !important;
+    background-color: #62b4de;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%; /* важно */
+}
+
+.edu-progress {
+    margin: 50px 0px 0px 0px;
+    border: solid 2px #cacaca;
+    border-radius: 10px;
+    padding: 25px;
+    background-color: #62b4de;
+    color: #fff;
+}
+
+.courses {
+    margin: 35px 0px 0px 0px;
+}
+
+.courses__title {
+    text-align: center;
+}
+
+.courses__item {
+    display: flex;
+    margin: 20px 0px 0px 0px;
+}
+
+.courses__progress {
+    width: 200px;
+    height: 30px;
+    background-color: #cacaca;
+    margin: 0px 0px 0px 10px;
+    border-radius: 10px;
+}
+
+.first-bar {
+    width: 180px;
+    height: 30px;
+    background-color: #62b4de;
+    border-radius: 10px;
+}
+
+.second-bar {
+    width: 140px;
+    height: 30px;
+    background-color: #62b4de;
+    border-radius: 10px;
+}
+
+.third-bar {
+    width: 100px;
+    height: 30px;
+    background-color: #62b4de;
+    border-radius: 10px;
+}
+
+.courses__procent {
+    margin: 0px 0px 0px 10px;
+}
+
+.btn {
+    width: 250px;
+    height: 30px;
+    padding: 0px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #62b4de;
+    color: #fff;
+    margin: 40px 0px 0px 0px;
+    cursor: pointer;
+    font-weight: 700;
+}
