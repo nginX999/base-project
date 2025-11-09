@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
     <link rel="stylesheet" href="../styles/default_styles/font.css">
     <link rel="stylesheet" href="../styles/contacts.css">
+    <style>
+        /* Простые стили для валидации */
+        .error {
+            border: 2px solid red !important;
+        }
+        
+        .success {
+            border: 2px solid green !important;
+        }
+        
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -27,28 +44,43 @@
 
         <main class="content">
 
-            <section class="contact-me">
-                <h2 class="contact-me__title">Свяжитесь со мной</h2>
-                <form action="/submit" method="post" class="contact-me__form">
-                    <label for="name">Имя:</label>
-                    <input type="text" name="name" class="contact-me__input" placeholder="Введите Ваше имя...">
-                </form>
-                <form action="/submit" method="post" class="contact-me__form">
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" class="contact-me__input" placeholder="Введите Ваш Email...">
-                </form>
-                <form action="/submit" method="post" class="contact-me__form textarea">
-                    <label for="textarea">Сообщение:</label>
-                    <textarea name="message" id="message"></textarea>
-                </form>
-                <button class="contact-me__button">Отправить сообщение</button>
-            </section>
+            <section class="contacts-group">
+                <section class="contact-me">
+                    <h2 class="contact-me__title">Свяжитесь со мной</h2>
+                    <div class="line"></div>
+                    
+                    <!-- Добавляем id для формы и полей -->
+                    <form action="/submit" method="post" class="contact-me__form" id="nameForm">
+                        <label for="name">Имя:<br></label>
+                        <input type="text" name="name" id="nameInput" class="contact-me__input" placeholder="Введите Ваше имя...">
+                        <div class="error-message" id="nameError">Введите имя (минимум 2 символа)</div>
+                    </form>
+                    
+                    <form action="/submit" method="post" class="contact-me__form" id="emailForm">
+                        <label for="email">Email:<br></label>
+                        <input type="text" name="email" id="emailInput" class="contact-me__input" placeholder="Введите Ваш Email...">
+                        <div class="error-message" id="emailError">Введите корректный email</div>
+                    </form>
+                    
+                    <form action="/submit" method="post" class="contact-me__form contact-me__textarea" id="messageForm">
+                        <label for="textarea">Сообщение:</label>
+                        <textarea name="message" id="messageInput" class="textarea"></textarea>
+                        <div class="error-message" id="messageError">Сообщение должно быть не менее 10 символов</div>
+                    </form>
+                    
+                    <button class="contact-me__button" id="submitButton">Отправить сообщение</button>
+                </section>
 
-            <section class="contacts">
-                <h2 class="contacts__title">Контакты:</h2>
-                <div class="contacts__mail">dzigoev.d.g@edu.ru</div>
-                <div class="contacts__github">Github: @nginX999</div>
-                <div class="contacts__city">Москва, Россия</div>
+                <section class="contacts">
+                    <h2 class="contacts__title">Контакты:</h2>
+                    <div class="line"></div>
+                    <div class="contacts__mail contacts__item">
+                        <div class="decoration"></div>
+                        dzigoev.d.g@edu.ru
+                    </div>
+                    <div class="contacts__github contacts__item">Github: @nginX999</div>
+                    <div class="contacts__city contacts__item">Москва, Россия</div>
+                </section>
             </section>
         </main>
         
@@ -56,5 +88,62 @@
             &copy;2025 Контакты
         </footer>
     </div>
+
+    <script>
+        // Простая валидация
+        document.getElementById('submitButton').addEventListener('click', function() {
+            let isValid = true;
+            
+            // Проверка имени
+            const nameInput = document.getElementById('nameInput');
+            const nameError = document.getElementById('nameError');
+            if (nameInput.value.trim().length < 2) {
+                nameInput.classList.add('error');
+                nameInput.classList.remove('success');
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameInput.classList.remove('error');
+                nameInput.classList.add('success');
+                nameError.style.display = 'none';
+            }
+            
+            // Проверка email
+            const emailInput = document.getElementById('emailInput');
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                emailInput.classList.add('error');
+                emailInput.classList.remove('success');
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailInput.classList.remove('error');
+                emailInput.classList.add('success');
+                emailError.style.display = 'none';
+            }
+            
+            // Проверка сообщения
+            const messageInput = document.getElementById('messageInput');
+            const messageError = document.getElementById('messageError');
+            if (messageInput.value.trim().length < 10) {
+                messageInput.classList.add('error');
+                messageInput.classList.remove('success');
+                messageError.style.display = 'block';
+                isValid = false;
+            } else {
+                messageInput.classList.remove('error');
+                messageInput.classList.add('success');
+                messageError.style.display = 'none';
+            }
+            
+            // Если все поля валидны
+            if (isValid) {
+                alert('Сообщение отправлено!');
+                // Можно добавить отправку формы
+                // document.getElementById('nameForm').submit();
+            }
+        });
+    </script>
 </body>
 </html>

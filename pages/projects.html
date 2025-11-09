@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,330 @@
     <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
     <link rel="stylesheet" href="../styles/default_styles/font.css">
     <link rel="stylesheet" href="../styles/projects.css">
+    <style>
+        /* СТРАНИЦА ПРОЕКТОВ */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            flex: 1; /* Контейнер растягивается */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1; /* Контент занимает все пространство */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .footer {
+            background-color: #234480;
+            color: aliceblue;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75px;
+            background-color: #234480;
+        }
+
+        .header__image {
+            width: 100px;
+            height: 100px;
+        }
+
+        .header__text {
+            font-size: 24px;
+            color: aliceblue;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;      /* центрируем навигацию */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #2a5298;
+        }
+
+        .nav__list {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .nav__item {
+            font-size: 16px;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            display: block;
+            padding: 10px 32px 10px 32px;
+            transition: all 0.2s ease;
+            font-weight: 700;
+            color:#fff !important;
+        }
+
+        .nav__link--active {
+            color: #fff !important; 
+            background-color: #152b5a;
+        }
+
+        .nav__link:hover {
+            color: #ffffff !important;
+            background-color: #152b5a;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%; /* важно */
+        }
+
+        .projects-group {
+            margin: 30px 0px 0px 0px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3); 
+            color: #fff;   
+        }
+
+        .bar {
+            display: flex;
+            justify-content:space-between;
+            margin: 30px 0px 0px 0px;
+        }
+
+        .scroll-list {
+            display: flex;
+        }
+
+        .scroll-list__item {
+            margin: 0px 5px 0px 0px;
+        }
+
+        .scroll-list__link {
+            padding: 10px;
+            background-color: #fff;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .line {
+            margin: 10px 0px 20px 0px;
+            width: 100%;
+            height: 2px;
+            background-color: #2a5298;
+        }
+
+        .project {
+            margin: 30px 0px 0px 0px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-items: center; /* Центрируем карточки */
+        }
+
+        .project__card {
+            width: 300px;
+            height: 200px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .project__card:hover {
+            transform: translateX(-5px) translateY(-5px);
+        }
+
+
+        .first-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/htmlandcss.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .second-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/todo.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .third-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/shop_1.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .fourth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/Portfolio.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .projects-group {
+            margin: 30px 0px 0px 0px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+            color: #2a5298;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s;
+            position: relative;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .modal-header {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        .modal-body {
+            padding: 10px 0;
+        }
+        
+        .modal-footer {
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+            text-align: right;
+        }
+        
+        .modal-btn {
+            background-color: #2a5298;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .modal-btn:hover {
+            background-color: #1e3d72;
+        }
+        
+        .modal-btn--secondary {
+            background-color: #6c757d;
+        }
+        
+        .modal-btn--secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px 5px 5px 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -26,34 +350,149 @@
         </nav>
 
         <main class="content">
-            
-            <section class="project__bar bar">
-                <h2 class="project__title title">Мои проекты</h2>
+            <div class="projects-group">
+                <section class="project__bar bar">
+                    <h2 class="project__title title">Мои проекты</h2>
 
-                <ul class="project__scroll-list scroll-list">
-                    <li class="scroll-list__item"><a href="" class="scroll-list__link">Все</a></li>
-                    <li class="scroll-list__item"><a href="" class="scroll-list__link">HTML</a></li>
-                    <li class="scroll-list__item"><a href="" class="scroll-list__link">JS</a></li>
-                    <li class="scroll-list__item"><a href="" class="scroll-list__link">React</a></li>
-                </ul>
+                    <ul class="project__scroll-list scroll-list">
+                        <li class="scroll-list__item"><a href="" class="scroll-list__link">Все</a></li>
+                        <li class="scroll-list__item"><a href="" class="scroll-list__link">HTML</a></li>
+                        <li class="scroll-list__item"><a href="" class="scroll-list__link">JS</a></li>
+                        <li class="scroll-list__item"><a href="" class="scroll-list__link">Python</a></li>
+                    </ul>
 
-            </section>
+                </section>
 
-            <section class="project">
-                <div class="project__card first-card">
-                    <p class="project__text">Личный сайт <br> HTML,CSS</p>
-                </div>
-                <div class="project__card second-card">
-                    <p class="project__text">Todo-приложение <br> JavaScript</p>
-                </div>
-                <div class="project__card third-card">
-                    <p class="project__text">Интернет-магазин <br> React</p>
-                </div>
-                <div class="project__card fourth-card">
-                    <p class="project__text">Портфолио <br> Bootstrap</p>
-                </div>
-            </section>
+                <div class="line"></div>
 
+                <section class="project">
+                    <div class="project__card first-card" onclick="openModal('modal1')">
+                        <p class="project__text">Личный сайт <br> HTML,CSS</p>
+                    </div>
+                    <div class="project__card second-card" onclick="openModal('modal2')">
+                        <p class="project__text">Калькулятор на Python</p>
+                    </div>
+                    <div class="project__card third-card" onclick="openModal('modal3')">
+                        <p class="project__text">Конвертер валют</p>
+                    </div>
+                    <div class="project__card fourth-card" onclick="openModal('modal4')">
+                        <p class="project__text">Генератор паролей</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Модальные окна для каждого проекта -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal1')">&times;</span>
+                    <div class="modal-header">
+                        <h2>Личный сайт</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Технологии:</strong> 
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </p>
+                        <p><strong>Описание:</strong> Персональный веб-сайт с информацией обо мне, моих навыках и проектах. Включает разделы "Обо мне", "Портфолио" и "Контакты".</p>
+                        <p><strong>Особенности:</strong></p>
+                        <ul>
+                            <li>Адаптивный дизайн</li>
+                            <li>Современный интерфейс</li>
+                            <li>Оптимизированная загрузка</li>
+                            <li>Интерактивные элементы</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn--secondary" onclick="closeModal('modal1')">Закрыть</button>
+                        <button class="modal-btn" onclick="window.open('https://github.com/nginX999/frontend-and-backend-practice', '_blank')">Посмотреть код</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal2')">&times;</span>
+                    <div class="modal-header">
+                        <h2>Калькулятор на Python</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Технологии:</strong> 
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Tkinter</span>
+                        </p>
+                        <p><strong>Описание:</strong> Графическое приложение-калькулятор с базовыми математическими операциями и интуитивно понятным интерфейсом.</p>
+                        <p><strong>Особенности:</strong></p>
+                        <ul>
+                            <li>Сложение, вычитание, умножение, деление</li>
+                            <li>Обработка ошибок (деление на ноль)</li>
+                            <li>Графический интерфейс</li>
+                            <li>Кнопка сброса</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn--secondary" onclick="closeModal('modal2')">Закрыть</button>
+                        <button class="modal-btn" onclick="window.open('https://github.com/numworks/epsilon', '_blank')">Посмотреть код</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal3" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal3')">&times;</span>
+                    <div class="modal-header">
+                        <h2>Конвертер валют</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Технологии:</strong> 
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">API</span>
+                        </p>
+                        <p><strong>Описание:</strong> Веб-приложение для конвертации валют с актуальными курсами, полученными через внешний API.</p>
+                        <p><strong>Особенности:</strong></p>
+                        <ul>
+                            <li>Поддержка популярных валют (USD, EUR, RUB)</li>
+                            <li>Автоматическое обновление курсов</li>
+                            <li>Интуитивный интерфейс</li>
+                            <li>История конвертаций</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn--secondary" onclick="closeModal('modal3')">Закрыть</button>
+                        <button class="modal-btn" onclick="window.open('https://github.com/HandlebarLabs/currency-converter-starter', '_blank')">Посмотреть код</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal4" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal4')">&times;</span>
+                    <div class="modal-header">
+                        <h2>Генератор паролей</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Технологии:</strong> 
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </p>
+                        <p><strong>Описание:</strong> Инструмент для создания безопасных паролей с настройкой длины и типов используемых символов.</p>
+                        <p><strong>Особенности:</strong></p>
+                        <ul>
+                            <li>Настройка длины пароля</li>
+                            <li>Выбор типов символов (буквы, цифры, спецсимволы)</li>
+                            <li>Копирование в буфер обмена</li>
+                            <li>Индикатор сложности пароля</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn--secondary" onclick="closeModal('modal4')">Закрыть</button>
+                        <button class="modal-btn" onclick="window.open('https://github.com/username/password-generatorhttps://github.com/KuroLabs/stegcloak', '_blank')">Посмотреть код</button>
+                    </div>
+                </div>
+            </div>
 
         </main>
         
@@ -61,5 +500,36 @@
             &copy;2025 Контакты
         </footer>
     </div>
+
+    <script>
+        // Функции для работы с модальными окнами
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Закрытие модального окна при клике вне его области
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+        
+        // Закрытие модального окна при нажатии клавиши Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.getElementsByClassName('modal');
+                for (let i = 0; i < modals.length; i++) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

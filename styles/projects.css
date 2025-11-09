@@ -23,7 +23,7 @@ body {
 }
 
 .footer {
-    background-color: #868787;
+    background-color: #234480;
     color: aliceblue;
     padding: 30px 20px;
     text-align: center;
@@ -35,11 +35,9 @@ body {
     justify-content: center;
     align-items: center;
 
-    border-bottom: 4px solid #868787;
-
     height: 75px;
 
-    background-color: #868787;
+    background-color: #234480;
 }
 
 .header__image {
@@ -59,7 +57,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #fff;
+    background-color: #2a5298;
 }
 
 .nav__list {
@@ -78,17 +76,17 @@ body {
     padding: 10px 32px 10px 32px;
     transition: all 0.2s ease;
     font-weight: 700;
-    color:black !important;
+    color:#fff !important;
 }
 
 .nav__link--active {
     color: #fff !important; 
-    background-color: #62b4de;
+    background-color: #152b5a;
 }
 
 .nav__link:hover {
     color: #ffffff !important;
-    background-color: #62b4de;
+    background-color: #152b5a;
 }
 
 .content {
@@ -98,6 +96,13 @@ body {
     width: 100%; /* важно */
 }
 
+.projects-group {
+    margin: 30px 0px 0px 0px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3); 
+    color: #fff;   
+}
 
 .bar {
     display: flex;
@@ -116,11 +121,19 @@ body {
 
 .scroll-list__link {
     padding: 10px;
-    background-color: #62b4de;
+    background-color: #2a5298;
     text-decoration: none;
     color: #fff;
     border-radius: 5px;
 }
+
+.line {
+    margin: 10px 0px 20px 0px;
+    width: 100%;
+    height: 2px;
+    background-color: #2a5298;
+}
+
 .project {
     margin: 30px 0px 0px 0px;
     display: grid;
@@ -134,7 +147,6 @@ body {
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.25s ease;
-    border: solid 3px #eeeeee;
 }
 
 .project__card:hover {
@@ -145,7 +157,7 @@ body {
 .project__text {
     font-size: 25px;
     font-weight: 700;
-    color: #000;
+    color:#000;
     margin: 100px 0px 0px 30px;
 }
 
@@ -227,14 +239,11 @@ body {
     z-index: -1; /* Чтобы контент был поверх */
 }
 
-.footer {
-    width: 100%;
-    height: 50px;
-    background-color: #cacaca;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    left: 0;
-    bottom: 0;
+.projects-group {
+    margin: 30px 0px 0px 0px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
+    color: #2a5298;
 }
+
