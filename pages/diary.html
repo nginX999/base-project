@@ -7,6 +7,99 @@
     <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
     <link rel="stylesheet" href="../styles/default_styles/font.css">
     <link rel="stylesheet" href="../styles/diary.css">
+    <style>
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .modal-message {
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .modal-button {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .modal-button:hover {
+            background-color: #3a56d4;
+        }
+
+        /* Стили для кнопки "Добавить запись" */
+        .btn {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -63,16 +156,57 @@
                     </li>
                 </ul>
                 <section class="add-note">
-                    <button class="btn">Добавить запись</button>
+                    <button class="btn" id="addNoteBtn">Добавить запись</button>
                 </section>
             </section>
         </main>
 
+        <!-- Модальное окно -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="modal-icon">⚠️</div>
+                <h2 class="modal-title">Функция временно недоступна</h2>
+                <p class="modal-message">К сожалению, функция добавления записей в данный момент не работает. Мы работаем над исправлением этой проблемы. Пожалуйста, попробуйте позже.</p>
+                <button class="modal-button" id="modalCloseBtn">Понятно</button>
+            </div>
+        </div>
 
         <footer class="footer">
             &copy;2025 Контакты
         </footer>
     </div>
-    
+
+    <script>
+        // Получаем элементы DOM
+        const addNoteBtn = document.getElementById('addNoteBtn');
+        const modal = document.getElementById('modal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        // Обработчик клика по кнопке "Добавить запись"
+        addNoteBtn.addEventListener('click', function() {
+            // Показываем модальное окно
+            modal.style.display = 'flex';
+        });
+
+        // Обработчик клика по кнопке закрытия модального окна
+        modalCloseBtn.addEventListener('click', function() {
+            // Скрываем модальное окно
+            modal.style.display = 'none';
+        });
+
+        // Закрытие модального окна при клике вне его содержимого
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Закрытие модального окна при нажатии клавиши Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
