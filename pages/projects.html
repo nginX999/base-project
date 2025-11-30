@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проекты</title>
-    <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
-    <link rel="stylesheet" href="../styles/default_styles/font.css">
-    <link rel="stylesheet" href="../styles/projects.css">
     <style>
-        /* СТРАНИЦА ПРОЕКТОВ */
+        /* RESET STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* BASE STYLES */
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
         }
 
         .container {
-            flex: 1; /* Контейнер растягивается */
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .content {
-            flex: 1; /* Контент занимает все пространство */
+            flex: 1;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -39,12 +45,14 @@
             margin-top: 50px;
         }
 
+        /* HEADER */
         .header {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 75px;
             background-color: #234480;
+            padding: 0 20px;
         }
 
         .header__image {
@@ -55,11 +63,13 @@
         .header__text {
             font-size: 24px;
             color: aliceblue;
+            margin-left: 15px;
         }
 
+        /* NAVIGATION */
         .nav {
             display: flex;
-            justify-content: flex-end;      /* центрируем навигацию */
+            justify-content: flex-end;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             position: sticky;
             top: 0;
@@ -71,6 +81,7 @@
             display: flex;
             width: 100%;
             max-width: 600px;
+            list-style: none;
         }
 
         .nav__item {
@@ -80,270 +91,439 @@
         .nav__link {
             text-decoration: none;
             display: block;
-            padding: 10px 32px 10px 32px;
+            padding: 15px 32px;
             transition: all 0.2s ease;
             font-weight: 700;
-            color:#fff !important;
+            color: #fff !important;
         }
 
         .nav__link--active {
-            color: #fff !important; 
             background-color: #152b5a;
         }
 
         .nav__link:hover {
-            color: #ffffff !important;
             background-color: #152b5a;
         }
 
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%; /* важно */
-        }
-
+        /* PROJECTS SECTION */
         .projects-group {
-            margin: 30px 0px 0px 0px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3); 
-            color: #fff;   
+            margin: 30px 0 0 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            background-color: white;
+            color: #2a5298;
         }
 
         .bar {
             display: flex;
-            justify-content:space-between;
-            margin: 30px 0px 0px 0px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 20px 0;
+        }
+
+        .project__title {
+            color: #2a5298;
+            font-size: 28px;
+            font-weight: 700;
         }
 
         .scroll-list {
             display: flex;
-        }
-
-        .scroll-list__item {
-            margin: 0px 5px 0px 0px;
+            list-style: none;
+            gap: 10px;
         }
 
         .scroll-list__link {
-            padding: 10px;
-            background-color: #fff;
+            padding: 10px 20px;
+            background-color: #2a5298;
             text-decoration: none;
             color: #fff;
             border-radius: 5px;
+            transition: background-color 0.2s ease;
+            display: block;
+            font-weight: 600;
+        }
+
+        .scroll-list__link:hover {
+            background-color: #1e3d72;
         }
 
         .line {
-            margin: 10px 0px 20px 0px;
+            margin: 20px 0;
             width: 100%;
             height: 2px;
             background-color: #2a5298;
         }
 
+        /* PROJECT CARDS */
         .project {
-            margin: 30px 0px 0px 0px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            justify-items: center; /* Центрируем карточки */
+            gap: 25px;
+            justify-items: center;
         }
 
         .project__card {
-            width: 300px;
-            height: 200px;
+            width: 100%;
+            max-width: 320px;
+            height: 220px;
             border-radius: 15px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: flex-end;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .project__card:hover {
-            transform: translateX(-5px) translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
         }
 
-
-        .first-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('../images/htmlandcss.jpg');
+        .first-card {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/htmlandcss.jpg');
             background-size: cover;
             background-position: center;
-            filter: blur(5px);
-            z-index: -1;
         }
 
-        .second-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('../images/todo.png');
+        .second-card {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/todo.png');
             background-size: cover;
             background-position: center;
-            filter: blur(5px);
-            z-index: -1;
         }
 
-        .third-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('../images/shop_1.jpg');
+        .third-card {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/shop_1.jpg');
             background-size: cover;
             background-position: center;
-            filter: blur(5px);
-            z-index: -1;
         }
 
-        .fourth-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('../images/Portfolio.png');
+        .fourth-card {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/Portfolio.png');
             background-size: cover;
             background-position: center;
-            filter: blur(5px);
-            z-index: -1;
         }
 
-        .projects-group {
-            margin: 30px 0px 0px 0px;
+        .project__text {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
-            color: #2a5298;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
         }
 
-        /* Стили для модального окна */
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.7);
             animation: fadeIn 0.3s;
         }
-        
+
         .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            margin: 3% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             animation: slideIn 0.3s;
             position: relative;
         }
-        
+
         .close {
-            color: #aaa;
+            color: #666;
             float: right;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             position: absolute;
-            right: 15px;
-            top: 10px;
+            right: 20px;
+            top: 15px;
+            z-index: 2001;
+            transition: color 0.2s ease;
         }
-        
-        .close:hover,
-        .close:focus {
+
+        .close:hover {
             color: #000;
-            text-decoration: none;
         }
-        
+
         .modal-header {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 15px;
+            padding: 15px 0;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 20px;
         }
-        
+
+        .modal-header h2 {
+            color: #2a5298;
+            font-size: 28px;
+            margin: 0;
+        }
+
         .modal-body {
-            padding: 10px 0;
+            padding: 15px 0;
         }
-        
+
         .modal-footer {
-            padding: 10px 0;
-            border-top: 1px solid #eee;
-            margin-top: 15px;
+            padding: 20px 0 0 0;
+            border-top: 2px solid #eaeaea;
+            margin-top: 25px;
             text-align: right;
         }
-        
+
         .modal-btn {
             background-color: #2a5298;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
-            margin-left: 10px;
+            font-weight: 600;
+            margin-left: 12px;
+            transition: all 0.2s ease;
         }
-        
+
         .modal-btn:hover {
             background-color: #1e3d72;
+            transform: translateY(-2px);
         }
-        
+
         .modal-btn--secondary {
             background-color: #6c757d;
         }
-        
+
         .modal-btn--secondary:hover {
             background-color: #5a6268;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
+
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        
+
         .tech-tag {
             display: inline-block;
             background-color: #e9ecef;
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin: 5px 5px 5px 0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin: 5px 8px 5px 0;
             font-size: 14px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        /* GALLERY STYLES - ИСПРАВЛЕННЫЕ */
+        .gallery {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .gallery-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #2a5298;
+            font-weight: 600;
+        }
+
+        .gallery-main {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            border: 2px solid #dee2e6;
+            padding: 10px;
+        }
+
+        .gallery-main img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 120px;
+            border: 3px solid transparent;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: #2a5298;
+        }
+
+        .gallery-item.active {
+            border-color: #2a5298;
+            box-shadow: 0 0 15px rgba(42, 82, 152, 0.4);
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .gallery-description {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 8px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        /* CONTENT STYLES */
+        .modal-body p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .modal-body strong {
+            color: #2a5298;
+        }
+
+        .modal-body ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .modal-body li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+                padding: 20px;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-main {
+                min-height: 300px;
+            }
+
+            .bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .scroll-list {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .project {
+                grid-template-columns: 1fr;
+            }
+
+            .project__card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 140px;
+            }
+
+            .gallery-main {
+                min-height: 250px;
+            }
+
+            .modal-btn {
+                padding: 10px 18px;
+                font-size: 14px;
+                margin-left: 8px;
+            }
+
+            .nav__list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav__link {
+                padding: 12px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-
         <header class="header">
-            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" alt="" class="header__image">
+            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" alt="Логотип" class="header__image">
             <h1 class="header__text">Дзигоев Давид Георгиевич</h1>
         </header>
 
         <nav class="nav">
             <ul class="nav__list">
                 <li class="nav__item"><a href="../index.html" class="nav__link">Главная</a></li>
-                <li class="nav__item"><a href="../pages/projects.html" class="nav__link  nav__link--active">Проекты</a></li>
+                <li class="nav__item"><a href="../pages/projects.html" class="nav__link nav__link--active">Проекты</a></li>
                 <li class="nav__item"><a href="../pages/diary.html" class="nav__link">Дневник</a></li>
                 <li class="nav__item"><a href="../pages/contacts.html" class="nav__link">Контакты</a></li>
             </ul>
@@ -352,36 +532,34 @@
         <main class="content">
             <div class="projects-group">
                 <section class="project__bar bar">
-                    <h2 class="project__title title">Мои проекты</h2>
-
+                    <h2 class="project__title">Мои проекты</h2>
                     <ul class="project__scroll-list scroll-list">
-                        <li class="scroll-list__item"><a href="" class="scroll-list__link">Все</a></li>
-                        <li class="scroll-list__item"><a href="" class="scroll-list__link">HTML</a></li>
-                        <li class="scroll-list__item"><a href="" class="scroll-list__link">JS</a></li>
-                        <li class="scroll-list__item"><a href="" class="scroll-list__link">Python</a></li>
+                        <li class="scroll-list__item"><a href="#" class="scroll-list__link">Все</a></li>
+                        <li class="scroll-list__item"><a href="#" class="scroll-list__link">HTML</a></li>
+                        <li class="scroll-list__item"><a href="#" class="scroll-list__link">JS</a></li>
+                        <li class="scroll-list__item"><a href="#" class="scroll-list__link">Python</a></li>
                     </ul>
-
                 </section>
 
                 <div class="line"></div>
 
                 <section class="project">
                     <div class="project__card first-card" onclick="openModal('modal1')">
-                        <p class="project__text">Личный сайт <br> HTML,CSS</p>
+                        <p class="project__text">Личный сайт<br>HTML, CSS</p>
                     </div>
                     <div class="project__card second-card" onclick="openModal('modal2')">
-                        <p class="project__text">Калькулятор на Python</p>
+                        <p class="project__text">Калькулятор<br>на Python</p>
                     </div>
                     <div class="project__card third-card" onclick="openModal('modal3')">
-                        <p class="project__text">Конвертер валют</p>
+                        <p class="project__text">Конвертер<br>валют</p>
                     </div>
                     <div class="project__card fourth-card" onclick="openModal('modal4')">
-                        <p class="project__text">Генератор паролей</p>
+                        <p class="project__text">Генератор<br>паролей</p>
                     </div>
                 </section>
             </div>
 
-            <!-- Модальные окна для каждого проекта -->
+            <!-- МОДАЛЬНЫЕ ОКНА -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal('modal1')">&times;</span>
@@ -395,12 +573,32 @@
                             <span class="tech-tag">JavaScript</span>
                         </p>
                         <p><strong>Описание:</strong> Персональный веб-сайт с информацией обо мне, моих навыках и проектах. Включает разделы "Обо мне", "Портфолио" и "Контакты".</p>
+                        
+                        <!-- ГАЛЕРЕЯ -->
+                        <div class="gallery">
+                            <h3 class="gallery-title">Галерея проекта</h3>
+                            <div class="gallery-main">
+                                <img id="main-img-1" src="../images/SITE_1.jpg" alt="Главная страница личного сайта">
+                            </div>
+                            <div class="gallery-container">
+                                <div class="gallery-item active" onclick="changeImage('1', '../images/SITE_1.jpg', 'Главная страница личного сайта', this)">
+                                    <img src="../images/SITE_1.jpg" alt="Главная страница">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('1', '../images/SITE_2.jpg', 'Страница портфолио', this)">
+                                    <img src="../images/SITE_2.jpg" alt="Страница портфолио">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('1', '../images/contacts-page.jpg', 'Страница контактов', this)">
+                                    <img src="../images/SITE_3.jpg" alt="Страница контактов">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <p><strong>Особенности:</strong></p>
                         <ul>
-                            <li>Адаптивный дизайн</li>
-                            <li>Современный интерфейс</li>
-                            <li>Оптимизированная загрузка</li>
-                            <li>Интерактивные элементы</li>
+                            <li>Адаптивный дизайн для всех устройств</li>
+                            <li>Современный интерфейс с анимациями</li>
+                            <li>Оптимизированная загрузка страниц</li>
+                            <li>Интерактивные элементы на JavaScript</li>
                         </ul>
                     </div>
                     <div class="modal-footer">
@@ -422,6 +620,25 @@
                             <span class="tech-tag">Tkinter</span>
                         </p>
                         <p><strong>Описание:</strong> Графическое приложение-калькулятор с базовыми математическими операциями и интуитивно понятным интерфейсом.</p>
+                        
+                        <div class="gallery">
+                            <h3 class="gallery-title">Галерея проекта</h3>
+                            <div class="gallery-main">
+                                <img id="main-img-2" src="../images/CALC_1.jpg" alt="Интерфейс калькулятора">
+                            </div>
+                            <div class="gallery-container">
+                                <div class="gallery-item active" onclick="changeImage('2', '../images/CALC_1.jpg', 'Интерфейс калькулятора', this)">
+                                    <img src="../images/CALC_1.jpg" alt="Интерфейс калькулятора">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('2', '../images/CALC_2.jpg', 'Код калькулятора', this)">
+                                    <img src="../images/CALC_2.jpg" alt="Код калькулятора">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('2', '../images/CALC_3.jpg', 'Пример вычислений', this)">
+                                    <img src="../images/CALC_3.jpg" alt="Пример вычислений">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <p><strong>Особенности:</strong></p>
                         <ul>
                             <li>Сложение, вычитание, умножение, деление</li>
@@ -451,6 +668,25 @@
                             <span class="tech-tag">API</span>
                         </p>
                         <p><strong>Описание:</strong> Веб-приложение для конвертации валют с актуальными курсами, полученными через внешний API.</p>
+                        
+                        <div class="gallery">
+                            <h3 class="gallery-title">Галерея проекта</h3>
+                            <div class="gallery-main">
+                                <img id="main-img-3" src="../images/CONV_1.jpg" alt="Интерфейс конвертера валют">
+                            </div>
+                            <div class="gallery-container">
+                                <div class="gallery-item active" onclick="changeImage('3', '../images/currency-converter.jpg', 'Интерфейс конвертера валют', this)">
+                                    <img src="../images/CONV_1.jpg" alt="Интерфейс конвертера">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('3', '../images/currency-mobile.jpg', 'Адаптивная версия', this)">
+                                    <img src="../images/CONV_2.jpg" alt="Адаптивная версия">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('3', '../images/currency-history.jpg', 'История конвертаций', this)">
+                                    <img src="../images/CONV_3.jpg" alt="История конвертаций">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <p><strong>Особенности:</strong></p>
                         <ul>
                             <li>Поддержка популярных валют (USD, EUR, RUB)</li>
@@ -479,6 +715,25 @@
                             <span class="tech-tag">CSS</span>
                         </p>
                         <p><strong>Описание:</strong> Инструмент для создания безопасных паролей с настройкой длины и типов используемых символов.</p>
+                        
+                        <div class="gallery">
+                            <h3 class="gallery-title">Галерея проекта</h3>
+                            <div class="gallery-main">
+                                <img id="main-img-4" src="../images/PASS_1.jpg" alt="Интерфейс генератора паролей">
+                            </div>
+                            <div class="gallery-container">
+                                <div class="gallery-item active" onclick="changeImage('4', '../images/password-generator.jpg', 'Интерфейс генератора паролей', this)">
+                                    <img src="../images/PASS_1.jpg" alt="Интерфейс генератора">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('4', '../images/password-options.jpg', 'Настройки генерации', this)">
+                                    <img src="../images/PASS_2.jpg" alt="Настройки генерации">
+                                </div>
+                                <div class="gallery-item" onclick="changeImage('4', '../images/password-strength.jpg', 'Индикатор сложности', this)">
+                                    <img src="../images/PASS_3.jpg" alt="Индикатор сложности">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <p><strong>Особенности:</strong></p>
                         <ul>
                             <li>Настройка длины пароля</li>
@@ -489,11 +744,10 @@
                     </div>
                     <div class="modal-footer">
                         <button class="modal-btn modal-btn--secondary" onclick="closeModal('modal4')">Закрыть</button>
-                        <button class="modal-btn" onclick="window.open('https://github.com/username/password-generatorhttps://github.com/KuroLabs/stegcloak', '_blank')">Посмотреть код</button>
+                        <button class="modal-btn" onclick="window.open('https://github.com/KuroLabs/stegcloak', '_blank')">Посмотреть код</button>
                     </div>
                 </div>
             </div>
-
         </main>
         
         <footer class="footer">
@@ -505,10 +759,34 @@
         // Функции для работы с модальными окнами
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Функция для смены изображения в галерее
+        function changeImage(modalId, imageSrc, description, clickedElement) {
+            const mainImg = document.getElementById('main-img-' + modalId);
+            const mainDesc = document.getElementById('main-desc-' + modalId);
+            
+            // Убираем активный класс у всех элементов галереи
+            const galleryItems = document.querySelectorAll(`#${modalId} .gallery-item`);
+            galleryItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Добавляем активный класс к clicked элементу
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+            
+            // Обновляем основное изображение и описание
+            mainImg.src = imageSrc;
+            mainImg.alt = description;
+            mainDesc.textContent = description;
         }
         
         // Закрытие модального окна при клике вне его области
@@ -516,7 +794,7 @@
             const modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
                 if (event.target == modals[i]) {
-                    modals[i].style.display = 'none';
+                    closeModal(modals[i].id);
                 }
             }
         }
@@ -526,9 +804,22 @@
             if (event.key === 'Escape') {
                 const modals = document.getElementsByClassName('modal');
                 for (let i = 0; i < modals.length; i++) {
-                    modals[i].style.display = 'none';
+                    if (modals[i].style.display === 'block') {
+                        closeModal(modals[i].id);
+                    }
                 }
             }
+        });
+
+        // Предотвращение открытия ссылок в фильтрах
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterLinks = document.querySelectorAll('.scroll-list__link');
+            filterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Фильтр:', this.textContent);
+                });
+            });
         });
     </script>
 </body>

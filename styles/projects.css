@@ -1,249 +1,112 @@
-/* СТРАНИЦА ПРОЕКТОВ */
-/* Добавьте в существующие стили */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* projects.css */
+/* Сброс стилей и базовые настройки уже должны быть в resetting_styles.css и font.css */
 
-.container {
-    flex: 1; /* Контейнер растягивается */
-    display: flex;
-    flex-direction: column;
-}
-
-.content {
-    flex: 1; /* Контент занимает все пространство */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
-
-.footer {
-    background-color: #234480;
-    color: aliceblue;
-    padding: 30px 20px;
-    text-align: center;
-    margin-top: 50px;
-}
-
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 75px;
-
-    background-color: #234480;
-}
-
-.header__image {
-    width: 100px;
-    height: 100px;
-}
-
-.header__text {
-    font-size: 24px;
-    color: aliceblue;
-}
-
-.nav {
-    display: flex;
-    justify-content: flex-end;      /* центрируем навигацию */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: #2a5298;
-}
-
-.nav__list {
-    display: flex;
-    width: 100%;
-    max-width: 600px;
-}
-
-.nav__item {
-    font-size: 16px;
-}
-
-.nav__link {
-    text-decoration: none;
-    display: block;
-    padding: 10px 32px 10px 32px;
-    transition: all 0.2s ease;
+/* Дополнительные стили для страницы проектов */
+.project__title {
+    color: #2a5298;
+    font-size: 28px;
     font-weight: 700;
-    color:#fff !important;
+    margin: 0;
 }
 
-.nav__link--active {
-    color: #fff !important; 
-    background-color: #152b5a;
-}
-
-.nav__link:hover {
-    color: #ffffff !important;
-    background-color: #152b5a;
-}
-
-.content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%; /* важно */
-}
-
-.projects-group {
-    margin: 30px 0px 0px 0px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3); 
-    color: #fff;   
-}
-
-.bar {
-    display: flex;
-    justify-content:space-between;
-
-    margin: 30px 0px 0px 0px;
-}
-
-.scroll-list {
-    display: flex;
-}
-
-.scroll-list__item {
-    margin: 0px 5px 0px 0px;
-}
-
-.scroll-list__link {
-    padding: 10px;
-    background-color: #2a5298;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.line {
-    margin: 10px 0px 20px 0px;
-    width: 100%;
-    height: 2px;
-    background-color: #2a5298;
-}
-
-.project {
-    margin: 30px 0px 0px 0px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
+/* Улучшенные стили для карточек проектов */
 .project__card {
-    width: 300px;
-    height: 200px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .project__card:hover {
-    transform: translateX(-5px) translateY(-5px);
-
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Стили для текста на карточках */
 .project__text {
-    font-size: 25px;
-    font-weight: 700;
-    color:#000;
-    margin: 100px 0px 0px 30px;
-}
-
-.first-card {
     position: relative;
-    overflow: hidden; /* Важно для blur эффекта */
+    z-index: 2;
 }
 
-.first-card::before {
-    content: '';
+/* Анимация для загрузки изображений */
+@keyframes imageLoad {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.gallery-main img {
+    animation: imageLoad 0.5s ease-out;
+}
+
+/* Стили для активного состояния фильтров */
+.scroll-list__link.active {
+    background-color: #152b5a;
+    font-weight: bold;
+}
+
+/* Улучшенные стили для модальных окон на мобильных устройствах */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 15px 10px;
+    }
+    
+    .gallery-container {
+        gap: 5px;
+    }
+    
+    .gallery-item {
+        height: 100px;
+    }
+}
+
+/* Стили для состояния загрузки */
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Плавные переходы */
+* {
+    transition: opacity 0.3s ease;
+}
+
+/* Улучшенная доступность */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Подсветка фокуса для доступности */
+.modal-btn:focus,
+.scroll-list__link:focus,
+.gallery-item:focus {
+    outline: 2px solid #2a5298;
+    outline-offset: 2px;
+}
+
+/* Стили для ошибок загрузки изображений */
+.gallery-main img:before {
+    content: "Ошибка загрузки изображения";
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/htmlandcss.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: blur(5px); /* Сила размытия */
-    z-index: -1; /* Чтобы контент был поверх */
+    background-color: #f8f9fa;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 }
 
-.second-card {
-    position: relative;
-    overflow: hidden; /* Важно для blur эффекта */
-}
 
-.second-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/todo.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(5px); /* Сила размытия */
-    z-index: -1; /* Чтобы контент был поверх */
-}
-
-.third-card {
-    position: relative;
-    overflow: hidden; /* Важно для blur эффекта */
-}
-
-.third-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/shop_1.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: blur(5px); /* Сила размытия */
-    z-index: -1; /* Чтобы контент был поверх */
-}
-
-.fourth-card {
-    position: relative;
-    overflow: hidden; /* Важно для blur эффекта */
-}
-
-.fourth-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/Portfolio.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(5px); /* Сила размытия */
-    z-index: -1; /* Чтобы контент был поверх */
-}
-
-.projects-group {
-    margin: 30px 0px 0px 0px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.3);
-    color: #2a5298;
-}
 
