@@ -1,35 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Контакты</title>
     <link rel="stylesheet" href="../styles/default_styles/resetting_styles.css">
     <link rel="stylesheet" href="../styles/default_styles/font.css">
     <link rel="stylesheet" href="../styles/contacts.css">
     <style>
-        /* Простые стили для валидации */
+        /* SKIP LINK */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #2a5298;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 9999;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* FOCUS VISIBLE */
+        :focus-visible {
+            outline: 3px solid #4361ee;
+            outline-offset: 3px;
+        }
+
+        /* SAFE AREA */
+        .header, .nav {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .header {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .nav {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        /* GRID LAYOUT */
+        .contacts-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .contacts-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FORM STYLES */
+        .contact-me__form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2a5298;
+        }
+
+        .contact-me__input,
+        .textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .contact-me__input:focus,
+        .textarea:focus {
+            border-color: #4361ee;
+            outline: none;
+        }
+
+        .textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ERROR/Success STYLES */
         .error {
-            border: 2px solid red !important;
+            border: 2px solid #dc3545 !important;
+            background-color: #fff5f5;
         }
         
         .success {
-            border: 2px solid green !important;
+            border: 2px solid #28a745 !important;
+            background-color: #f0fff4;
         }
         
         .error-message {
-            color: red;
-            font-size: 12px;
+            color: #dc3545;
+            font-size: 14px;
             margin-top: 5px;
             display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* BUTTON STYLES */
+        .contact-me__button {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .contact-me__button:hover,
+        .contact-me__button:focus {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-me__button:active {
+            transform: translateY(0);
+        }
+
+        /* CONTACT ITEMS */
+        .contacts__item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4361ee;
+        }
+
+        /* RESPONSIVE IMAGE */
+        .header__image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* STICKY NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #2a5298;
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    
     <div class="container">
 
         <header class="header">
-            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" alt="" class="header__image">
+            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" 
+                 alt="Логотип МИРЭА" 
+                 class="header__image"
+                 width="100"
+                 height="100">
             <h1 class="header__text">Дзигоев Давид Георгиевич</h1>
         </header>
 
@@ -42,33 +190,56 @@
             </ul>
         </nav>
 
-        <main class="content">
+        <main class="content" id="main-content">
 
             <section class="contacts-group">
                 <section class="contact-me">
                     <h2 class="contact-me__title">Свяжитесь со мной</h2>
                     <div class="line"></div>
                     
-                    <!-- Добавляем id для формы и полей -->
-                    <form action="/submit" method="post" class="contact-me__form" id="nameForm">
-                        <label for="name">Имя:<br></label>
-                        <input type="text" name="name" id="nameInput" class="contact-me__input" placeholder="Введите Ваше имя...">
-                        <div class="error-message" id="nameError">Введите имя (минимум 2 символа)</div>
+                    <form action="/submit" method="post" class="contact-me__form" id="contactForm">
+                        <div class="form-group">
+                            <label for="nameInput">Имя:</label>
+                            <input type="text" 
+                                   name="name" 
+                                   id="nameInput" 
+                                   class="contact-me__input" 
+                                   placeholder="Введите Ваше имя..."
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="nameError">
+                            <div class="error-message" id="nameError" role="alert">Введите имя (минимум 2 символа)</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="emailInput">Email:</label>
+                            <input type="email" 
+                                   name="email" 
+                                   id="emailInput" 
+                                   class="contact-me__input" 
+                                   placeholder="Введите Ваш Email..."
+                                   required
+                                   aria-required="true"
+                                   aria-describedby="emailError">
+                            <div class="error-message" id="emailError" role="alert">Введите корректный email</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="messageInput">Сообщение:</label>
+                            <textarea name="message" 
+                                      id="messageInput" 
+                                      class="textarea"
+                                      placeholder="Введите ваше сообщение..."
+                                      required
+                                      aria-required="true"
+                                      aria-describedby="messageError"></textarea>
+                            <div class="error-message" id="messageError" role="alert">Сообщение должно быть не менее 10 символов</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="contact-me__button" id="submitButton">Отправить сообщение</button>
+                        </div>
                     </form>
-                    
-                    <form action="/submit" method="post" class="contact-me__form" id="emailForm">
-                        <label for="email">Email:<br></label>
-                        <input type="text" name="email" id="emailInput" class="contact-me__input" placeholder="Введите Ваш Email...">
-                        <div class="error-message" id="emailError">Введите корректный email</div>
-                    </form>
-                    
-                    <form action="/submit" method="post" class="contact-me__form contact-me__textarea" id="messageForm">
-                        <label for="textarea">Сообщение:</label>
-                        <textarea name="message" id="messageInput" class="textarea"></textarea>
-                        <div class="error-message" id="messageError">Сообщение должно быть не менее 10 символов</div>
-                    </form>
-                    
-                    <button class="contact-me__button" id="submitButton">Отправить сообщение</button>
                 </section>
 
                 <section class="contacts">
@@ -76,10 +247,14 @@
                     <div class="line"></div>
                     <div class="contacts__mail contacts__item">
                         <div class="decoration"></div>
-                        dzigoev.d.g@edu.ru
+                        <strong>Email:</strong> dzigoev.d.g@edu.ru
                     </div>
-                    <div class="contacts__github contacts__item">Github: @nginX999</div>
-                    <div class="contacts__city contacts__item">Москва, Россия</div>
+                    <div class="contacts__github contacts__item">
+                        <strong>Github:</strong> @nginX999
+                    </div>
+                    <div class="contacts__city contacts__item">
+                        <strong>Город:</strong> Москва, Россия
+                    </div>
                 </section>
             </section>
         </main>
@@ -90,22 +265,29 @@
     </div>
 
     <script>
-        // Простая валидация
-        document.getElementById('submitButton').addEventListener('click', function() {
+        // Простая валидация формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             let isValid = true;
+            
+            // Сброс предыдущих ошибок
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.querySelectorAll('.contact-me__input, .textarea').forEach(el => {
+                el.classList.remove('error', 'success');
+            });
             
             // Проверка имени
             const nameInput = document.getElementById('nameInput');
             const nameError = document.getElementById('nameError');
             if (nameInput.value.trim().length < 2) {
                 nameInput.classList.add('error');
-                nameInput.classList.remove('success');
                 nameError.style.display = 'block';
                 isValid = false;
+                nameInput.focus();
             } else {
-                nameInput.classList.remove('error');
                 nameInput.classList.add('success');
-                nameError.style.display = 'none';
             }
             
             // Проверка email
@@ -114,13 +296,11 @@
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailInput.value.trim())) {
                 emailInput.classList.add('error');
-                emailInput.classList.remove('success');
                 emailError.style.display = 'block';
                 isValid = false;
+                if (isValid) emailInput.focus();
             } else {
-                emailInput.classList.remove('error');
                 emailInput.classList.add('success');
-                emailError.style.display = 'none';
             }
             
             // Проверка сообщения
@@ -128,20 +308,64 @@
             const messageError = document.getElementById('messageError');
             if (messageInput.value.trim().length < 10) {
                 messageInput.classList.add('error');
-                messageInput.classList.remove('success');
                 messageError.style.display = 'block';
                 isValid = false;
+                if (isValid) messageInput.focus();
             } else {
-                messageInput.classList.remove('error');
                 messageInput.classList.add('success');
-                messageError.style.display = 'none';
             }
             
             // Если все поля валидны
             if (isValid) {
-                alert('Сообщение отправлено!');
-                // Можно добавить отправку формы
-                // document.getElementById('nameForm').submit();
+                // Показываем сообщение об успехе
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.style.display = 'block';
+                successMessage.textContent = 'Сообщение успешно отправлено!';
+                successMessage.setAttribute('role', 'alert');
+                
+                const form = document.getElementById('contactForm');
+                form.insertBefore(successMessage, form.querySelector('.form-group:last-child'));
+                
+                // Скрываем сообщение через 3 секунды
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+                
+                // Можно добавить реальную отправку формы
+                // form.submit();
+            }
+        });
+
+        // Реальная проверка валидности при вводе
+        document.getElementById('nameInput').addEventListener('input', function() {
+            if (this.value.trim().length >= 2) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('nameError').style.display = 'none';
+            } else {
+                this.classList.remove('success');
+            }
+        });
+
+        document.getElementById('emailInput').addEventListener('input', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(this.value.trim())) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('emailError').style.display = 'none';
+            } else {
+                this.classList.remove('success');
+            }
+        });
+
+        document.getElementById('messageInput').addEventListener('input', function() {
+            if (this.value.trim().length >= 10) {
+                this.classList.remove('error');
+                this.classList.add('success');
+                document.getElementById('messageError').style.display = 'none';
+            } else {
+                this.classList.remove('success');
             }
         });
     </script>

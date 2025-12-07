@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewportfit=cover">
     <title>Проекты</title>
     <style>
         /* RESET STYLES */
@@ -21,6 +21,40 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
             line-height: 1.6;
+        }
+
+        /* SKIP LINK */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: #2a5298;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 9999;
+            border-radius: 0 0 8px 0;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid #ff6b6b;
+            outline-offset: 2px;
+        }
+
+        /* FOCUS VISIBLE STYLES */
+        :focus-visible {
+            outline: 3px solid #2a5298;
+            outline-offset: 2px;
+            border-radius: 3px;
+        }
+
+        /* Убираем outline по умолчанию для некоторых элементов */
+        button:focus:not(:focus-visible),
+        a:focus:not(:focus-visible) {
+            outline: none;
         }
 
         .container {
@@ -58,6 +92,7 @@
         .header__image {
             width: 100px;
             height: 100px;
+            object-fit: contain;
         }
 
         .header__text {
@@ -159,11 +194,12 @@
         /* PROJECT CARDS */
         .project {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 25px;
             justify-items: center;
         }
 
+        /* Responsive Cards */
         .project__card {
             width: 100%;
             max-width: 320px;
@@ -183,28 +219,26 @@
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .first-card {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/htmlandcss.jpg');
-            background-size: cover;
-            background-position: center;
+        /* Background images replaced with img tags for responsive images */
+        .project__card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
         }
 
-        .second-card {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/todo.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .third-card {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/shop_1.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .fourth-card {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/Portfolio.png');
-            background-size: cover;
-            background-position: center;
+        .project__card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+            z-index: 2;
         }
 
         .project__text {
@@ -217,6 +251,8 @@
             width: 100%;
             text-align: center;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            position: relative;
+            z-index: 3;
         }
 
         /* MODAL STYLES */
@@ -258,6 +294,14 @@
             top: 15px;
             z-index: 2001;
             transition: color 0.2s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close:hover {
@@ -334,7 +378,7 @@
             font-weight: 500;
         }
 
-        /* GALLERY STYLES - ИСПРАВЛЕННЫЕ */
+        /* GALLERY STYLES - С РЕСПОНСИВНЫМИ ИЗОБРАЖЕНИЯМИ */
         .gallery {
             margin: 25px 0;
             padding: 20px;
@@ -373,9 +417,10 @@
             display: block;
         }
 
+        /* Responsive Gallery Grid */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 12px;
             margin-bottom: 10px;
         }
@@ -446,6 +491,83 @@
             color: #555;
         }
 
+        /* FORM STYLES (для contacts.html и diary.html) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2a5298;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: #2a5298;
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error .form-input,
+        .error .form-textarea,
+        .error .form-select {
+            border-color: #dc3545;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: #2a5298;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e3d72;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
             .modal-content {
@@ -455,7 +577,7 @@
             }
 
             .gallery-container {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
 
             .gallery-main {
@@ -475,7 +597,7 @@
             }
 
             .project {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
             }
 
             .project__card {
@@ -511,12 +633,62 @@
                 padding: 12px 20px;
             }
         }
+
+        /* DIARY PAGE SPECIFIC */
+        .diary-entry {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .entry-date {
+            color: #2a5298;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .entry-content {
+            line-height: 1.7;
+        }
+
+        /* CONTACTS PAGE SPECIFIC */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
+    <!-- Skip link для доступности -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    
     <div class="container">
         <header class="header">
-            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" alt="Логотип" class="header__image">
+            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" 
+                 alt="Логотип МИРЭА" 
+                 class="header__image"
+                 width="100"
+                 height="100"
+                 loading="lazy">
             <h1 class="header__text">Дзигоев Давид Георгиевич</h1>
         </header>
 
@@ -529,7 +701,7 @@
             </ul>
         </nav>
 
-        <main class="content">
+        <main id="main-content" class="content" tabindex="-1">
             <div class="projects-group">
                 <section class="project__bar bar">
                     <h2 class="project__title">Мои проекты</h2>
@@ -544,16 +716,51 @@
                 <div class="line"></div>
 
                 <section class="project">
-                    <div class="project__card first-card" onclick="openModal('modal1')">
+                    <!-- Первая карточка - используем оригинальные изображения -->
+                    <div class="project__card" onclick="openModal('modal1')" tabindex="0" role="button">
+                        <img 
+                            src="../images/htmlandcss.jpg" 
+                            alt="Личный сайт проект"
+                            class="project__card-img"
+                            width="320"
+                            height="220"
+                            loading="lazy">
                         <p class="project__text">Личный сайт<br>HTML, CSS</p>
                     </div>
-                    <div class="project__card second-card" onclick="openModal('modal2')">
+                    
+                    <!-- Вторая карточка -->
+                    <div class="project__card" onclick="openModal('modal2')" tabindex="0" role="button">
+                        <img 
+                            src="../images/todo.png" 
+                            alt="Калькулятор проект"
+                            class="project__card-img"
+                            width="320"
+                            height="220"
+                            loading="lazy">
                         <p class="project__text">Калькулятор<br>на Python</p>
                     </div>
-                    <div class="project__card third-card" onclick="openModal('modal3')">
+                    
+                    <!-- Третья карточка -->
+                    <div class="project__card" onclick="openModal('modal3')" tabindex="0" role="button">
+                        <img 
+                            src="../images/shop_1.jpg" 
+                            alt="Конвертер валют проект"
+                            class="project__card-img"
+                            width="320"
+                            height="220"
+                            loading="lazy">
                         <p class="project__text">Конвертер<br>валют</p>
                     </div>
-                    <div class="project__card fourth-card" onclick="openModal('modal4')">
+                    
+                    <!-- Четвертая карточка -->
+                    <div class="project__card" onclick="openModal('modal4')" tabindex="0" role="button">
+                        <img 
+                            src="../images/Portfolio.png" 
+                            alt="Генератор паролей проект"
+                            class="project__card-img"
+                            width="320"
+                            height="220"
+                            loading="lazy">
                         <p class="project__text">Генератор<br>паролей</p>
                     </div>
                 </section>
@@ -562,7 +769,7 @@
             <!-- МОДАЛЬНЫЕ ОКНА -->
             <div id="modal1" class="modal">
                 <div class="modal-content">
-                    <span class="close" onclick="closeModal('modal1')">&times;</span>
+                    <button class="close" onclick="closeModal('modal1')" aria-label="Закрыть окно">&times;</button>
                     <div class="modal-header">
                         <h2>Личный сайт</h2>
                     </div>
@@ -574,21 +781,42 @@
                         </p>
                         <p><strong>Описание:</strong> Персональный веб-сайт с информацией обо мне, моих навыках и проектах. Включает разделы "Обо мне", "Портфолио" и "Контакты".</p>
                         
-                        <!-- ГАЛЕРЕЯ -->
+                        <!-- ГАЛЕРЕЯ С РЕСПОНСИВНЫМИ ИЗОБРАЖЕНИЯМИ -->
                         <div class="gallery">
                             <h3 class="gallery-title">Галерея проекта</h3>
                             <div class="gallery-main">
-                                <img id="main-img-1" src="../images/SITE_1.jpg" alt="Главная страница личного сайта">
+                                <img 
+                                    id="main-img-1"
+                                    src="../images/SITE_1.jpg"
+                                    alt="Главная страница личного сайта"
+                                    width="900"
+                                    height="500"
+                                    loading="lazy">
                             </div>
                             <div class="gallery-container">
                                 <div class="gallery-item active" onclick="changeImage('1', '../images/SITE_1.jpg', 'Главная страница личного сайта', this)">
-                                    <img src="../images/SITE_1.jpg" alt="Главная страница">
+                                    <img 
+                                        src="../images/SITE_1.jpg"
+                                        alt="Главная страница"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('1', '../images/SITE_2.jpg', 'Страница портфолио', this)">
-                                    <img src="../images/SITE_2.jpg" alt="Страница портфолио">
+                                    <img 
+                                        src="../images/SITE_2.jpg"
+                                        alt="Страница портфолио"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
-                                <div class="gallery-item" onclick="changeImage('1', '../images/contacts-page.jpg', 'Страница контактов', this)">
-                                    <img src="../images/SITE_3.jpg" alt="Страница контактов">
+                                <div class="gallery-item" onclick="changeImage('1', '../images/SITE_3.jpg', 'Страница контактов', this)">
+                                    <img 
+                                        src="../images/SITE_3.jpg"
+                                        alt="Страница контактов"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -610,7 +838,7 @@
 
             <div id="modal2" class="modal">
                 <div class="modal-content">
-                    <span class="close" onclick="closeModal('modal2')">&times;</span>
+                    <button class="close" onclick="closeModal('modal2')" aria-label="Закрыть окно">&times;</button>
                     <div class="modal-header">
                         <h2>Калькулятор на Python</h2>
                     </div>
@@ -624,17 +852,38 @@
                         <div class="gallery">
                             <h3 class="gallery-title">Галерея проекта</h3>
                             <div class="gallery-main">
-                                <img id="main-img-2" src="../images/CALC_1.jpg" alt="Интерфейс калькулятора">
+                                <img 
+                                    id="main-img-2"
+                                    src="../images/CALC_1.jpg"
+                                    alt="Интерфейс калькулятора"
+                                    width="800"
+                                    height="450"
+                                    loading="lazy">
                             </div>
                             <div class="gallery-container">
                                 <div class="gallery-item active" onclick="changeImage('2', '../images/CALC_1.jpg', 'Интерфейс калькулятора', this)">
-                                    <img src="../images/CALC_1.jpg" alt="Интерфейс калькулятора">
+                                    <img 
+                                        src="../images/CALC_1.jpg"
+                                        alt="Интерфейс калькулятора"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('2', '../images/CALC_2.jpg', 'Код калькулятора', this)">
-                                    <img src="../images/CALC_2.jpg" alt="Код калькулятора">
+                                    <img 
+                                        src="../images/CALC_2.jpg"
+                                        alt="Код калькулятора"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('2', '../images/CALC_3.jpg', 'Пример вычислений', this)">
-                                    <img src="../images/CALC_3.jpg" alt="Пример вычислений">
+                                    <img 
+                                        src="../images/CALC_3.jpg"
+                                        alt="Пример вычислений"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -656,7 +905,7 @@
 
             <div id="modal3" class="modal">
                 <div class="modal-content">
-                    <span class="close" onclick="closeModal('modal3')">&times;</span>
+                    <button class="close" onclick="closeModal('modal3')" aria-label="Закрыть окно">&times;</button>
                     <div class="modal-header">
                         <h2>Конвертер валют</h2>
                     </div>
@@ -672,17 +921,38 @@
                         <div class="gallery">
                             <h3 class="gallery-title">Галерея проекта</h3>
                             <div class="gallery-main">
-                                <img id="main-img-3" src="../images/CONV_1.jpg" alt="Интерфейс конвертера валют">
+                                <img 
+                                    id="main-img-3"
+                                    src="../images/CONV_1.jpg"
+                                    alt="Интерфейс конвертера валют"
+                                    width="800"
+                                    height="450"
+                                    loading="lazy">
                             </div>
                             <div class="gallery-container">
-                                <div class="gallery-item active" onclick="changeImage('3', '../images/currency-converter.jpg', 'Интерфейс конвертера валют', this)">
-                                    <img src="../images/CONV_1.jpg" alt="Интерфейс конвертера">
+                                <div class="gallery-item active" onclick="changeImage('3', '../images/CONV_1.jpg', 'Интерфейс конвертера валют', this)">
+                                    <img 
+                                        src="../images/CONV_1.jpg"
+                                        alt="Интерфейс конвертера"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
-                                <div class="gallery-item" onclick="changeImage('3', '../images/currency-mobile.jpg', 'Адаптивная версия', this)">
-                                    <img src="../images/CONV_2.jpg" alt="Адаптивная версия">
+                                <div class="gallery-item" onclick="changeImage('3', '../images/CONV_2.jpg', 'Адаптивная версия', this)">
+                                    <img 
+                                        src="../images/CONV_2.jpg"
+                                        alt="Адаптивная версия"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
-                                <div class="gallery-item" onclick="changeImage('3', '../images/currency-history.jpg', 'История конвертаций', this)">
-                                    <img src="../images/CONV_3.jpg" alt="История конвертаций">
+                                <div class="gallery-item" onclick="changeImage('3', '../images/CONV_3.jpg', 'История конвертаций', this)">
+                                    <img 
+                                        src="../images/CONV_3.jpg"
+                                        alt="История конвертаций"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -704,7 +974,7 @@
 
             <div id="modal4" class="modal">
                 <div class="modal-content">
-                    <span class="close" onclick="closeModal('modal4')">&times;</span>
+                    <button class="close" onclick="closeModal('modal4')" aria-label="Закрыть окно">&times;</button>
                     <div class="modal-header">
                         <h2>Генератор паролей</h2>
                     </div>
@@ -719,17 +989,38 @@
                         <div class="gallery">
                             <h3 class="gallery-title">Галерея проекта</h3>
                             <div class="gallery-main">
-                                <img id="main-img-4" src="../images/PASS_1.jpg" alt="Интерфейс генератора паролей">
+                                <img 
+                                    id="main-img-4"
+                                    src="../images/PASS_1.jpg"
+                                    alt="Интерфейс генератора паролей"
+                                    width="800"
+                                    height="450"
+                                    loading="lazy">
                             </div>
                             <div class="gallery-container">
-                                <div class="gallery-item active" onclick="changeImage('4', '../images/password-generator.jpg', 'Интерфейс генератора паролей', this)">
-                                    <img src="../images/PASS_1.jpg" alt="Интерфейс генератора">
+                                <div class="gallery-item active" onclick="changeImage('4', '../images/PASS_1.jpg', 'Интерфейс генератора паролей', this)">
+                                    <img 
+                                        src="../images/PASS_1.jpg"
+                                        alt="Интерфейс генератора"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
-                                <div class="gallery-item" onclick="changeImage('4', '../images/password-options.jpg', 'Настройки генерации', this)">
-                                    <img src="../images/PASS_2.jpg" alt="Настройки генерации">
+                                <div class="gallery-item" onclick="changeImage('4', '../images/PASS_2.jpg', 'Настройки генерации', this)">
+                                    <img 
+                                        src="../images/PASS_2.jpg"
+                                        alt="Настройки генерации"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
-                                <div class="gallery-item" onclick="changeImage('4', '../images/password-strength.jpg', 'Индикатор сложности', this)">
-                                    <img src="../images/PASS_3.jpg" alt="Индикатор сложности">
+                                <div class="gallery-item" onclick="changeImage('4', '../images/PASS_3.jpg', 'Индикатор сложности', this)">
+                                    <img 
+                                        src="../images/PASS_3.jpg"
+                                        alt="Индикатор сложности"
+                                        width="150"
+                                        height="100"
+                                        loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -758,19 +1049,29 @@
     <script>
         // Функции для работы с модальными окнами
         function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            
+            // Фокус на закрывающую кнопку для доступности
+            setTimeout(() => {
+                const closeBtn = modal.querySelector('.close');
+                if (closeBtn) closeBtn.focus();
+            }, 100);
         }
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
+            
+            // Возвращаем фокус на карточку, которая открыла модальное окно
+            const activeCard = document.querySelector(`[onclick="openModal('${modalId}')"]`);
+            if (activeCard) activeCard.focus();
         }
         
         // Функция для смены изображения в галерее
         function changeImage(modalId, imageSrc, description, clickedElement) {
             const mainImg = document.getElementById('main-img-' + modalId);
-            const mainDesc = document.getElementById('main-desc-' + modalId);
             
             // Убираем активный класс у всех элементов галереи
             const galleryItems = document.querySelectorAll(`#${modalId} .gallery-item`);
@@ -781,12 +1082,12 @@
             // Добавляем активный класс к clicked элементу
             if (clickedElement) {
                 clickedElement.classList.add('active');
+                clickedElement.focus(); // Для доступности
             }
             
-            // Обновляем основное изображение и описание
+            // Обновляем основное изображение
             mainImg.src = imageSrc;
             mainImg.alt = description;
-            mainDesc.textContent = description;
         }
         
         // Закрытие модального окна при клике вне его области
@@ -809,6 +1110,19 @@
                     }
                 }
             }
+            
+            // Навигация по карточкам проектов с клавиатуры
+            if (event.key === 'Enter' || event.key === ' ') {
+                const focusedCard = document.activeElement;
+                if (focusedCard && focusedCard.classList.contains('project__card')) {
+                    event.preventDefault();
+                    const onclickAttr = focusedCard.getAttribute('onclick');
+                    if (onclickAttr) {
+                        const modalId = onclickAttr.match(/'([^']+)'/)[1];
+                        openModal(modalId);
+                    }
+                }
+            }
         });
 
         // Предотвращение открытия ссылок в фильтрах
@@ -820,6 +1134,39 @@
                     console.log('Фильтр:', this.textContent);
                 });
             });
+            
+            // Функции для валидации форм (для contacts.html и diary.html)
+            window.validateForm = function(formId) {
+                const form = document.getElementById(formId);
+                const inputs = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    const errorElement = input.nextElementSibling;
+                    if (errorElement && errorElement.classList.contains('error-message')) {
+                        if (!input.value.trim()) {
+                            errorElement.style.display = 'block';
+                            input.parentElement.classList.add('error');
+                            isValid = false;
+                        } else {
+                            errorElement.style.display = 'none';
+                            input.parentElement.classList.remove('error');
+                        }
+                    }
+                });
+                
+                if (isValid) {
+                    const successMessage = form.querySelector('.success-message');
+                    if (successMessage) {
+                        successMessage.style.display = 'block';
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    }
+                }
+                
+                return isValid;
+            };
         });
     </script>
 </body>
