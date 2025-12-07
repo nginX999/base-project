@@ -57,6 +57,26 @@
             outline: none;
         }
 
+        /* TECHNIQUE 1: Базовое адаптивное изображение */
+        .responsive-image {
+            width: 100%; /* Занимает всю ширину контейнера */
+            height: auto; /* Высота рассчитывается автоматически */
+            display: block; /* Убирает лишние отступы */
+        }
+
+        /* TECHNIQUE 5: Object-fit свойства */
+        .object-fit-cover { 
+            object-fit: cover; /* Заполняет с обрезкой */
+        }
+        
+        .object-fit-contain { 
+            object-fit: contain; /* Вписывает полностью - ДЛЯ ГАЛЕРЕИ */
+        }
+        
+        .object-fit-fill { 
+            object-fit: fill; /* Растягивает */
+        }
+
         .container {
             flex: 1;
             display: flex;
@@ -191,12 +211,30 @@
             background-color: #2a5298;
         }
 
-        /* PROJECT CARDS */
+        /* TECHNIQUE 6: Адаптивная галерея - PROJECT CARDS */
         .project {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            grid-template-columns: repeat(4, 1fr); /* 4 колонки на десктопе */
             gap: 25px;
             justify-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .project {
+                grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшете */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project {
+                grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшете */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project {
+                grid-template-columns: 1fr; /* 1 колонка на мобильном */
+            }
         }
 
         /* Responsive Cards */
@@ -226,7 +264,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: 1;
         }
 
@@ -378,7 +415,7 @@
             font-weight: 500;
         }
 
-        /* GALLERY STYLES - С РЕСПОНСИВНЫМИ ИЗОБРАЖЕНИЯМИ */
+        /* TECHNIQUE 6: Адаптивная галерея - GALLERY STYLES - ИСПРАВЛЕНО */
         .gallery {
             margin: 25px 0;
             padding: 20px;
@@ -394,18 +431,21 @@
             font-weight: 600;
         }
 
+        /* ГЛАВНОЕ ИЗОБРАЖЕНИЕ ГАЛЕРЕИ - ИСПРАВЛЕНО */
         .gallery-main {
             width: 100%;
             margin-bottom: 20px;
             border-radius: 8px;
-            overflow: hidden;
             background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 400px;
+            max-height: 500px;
             border: 2px solid #dee2e6;
-            padding: 10px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden; /* ДОБАВЛЕНО: чтобы изображение не выходило за границы */
         }
 
         .gallery-main img {
@@ -413,22 +453,41 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain;
+            object-fit: contain; /* ПОЛНОЕ ОТОБРАЖЕНИЕ */
             display: block;
+            margin: 0 auto;
         }
 
         /* Responsive Gallery Grid */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(4, 1fr); /* 4 колонки на десктопе */
+            gap: 15px;
             margin-bottom: 10px;
         }
 
+        @media (max-width: 992px) {
+            .gallery-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшете */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшете */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: 1fr; /* 1 колонка на мобильном */
+            }
+        }
+
+        /* МИНИАТЮРЫ ГАЛЕРЕИ - ПОЛНОЕ ОТОБРАЖЕНИЕ */
         .gallery-item {
             cursor: pointer;
             border-radius: 8px;
-            overflow: hidden;
             transition: all 0.3s ease;
             height: 120px;
             border: 3px solid transparent;
@@ -436,12 +495,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden; /* Оставляем для миниатюр */
         }
 
         .gallery-item:hover {
             transform: scale(1.05);
             border-color: #2a5298;
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.2);
         }
 
         .gallery-item.active {
@@ -454,7 +516,7 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            object-fit: contain;
+            object-fit: contain; /* ПОЛНОЕ ОТОБРАЖЕНИЕ */
             display: block;
         }
 
@@ -491,81 +553,10 @@
             color: #555;
         }
 
-        /* FORM STYLES (для contacts.html и diary.html) */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2a5298;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-            border-color: #2a5298;
-        }
-
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .error .form-input,
-        .error .form-textarea,
-        .error .form-select {
-            border-color: #dc3545;
-        }
-
-        .success-message {
-            color: #28a745;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .submit-btn {
-            background-color: #2a5298;
-            color: white;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #1e3d72;
-            transform: translateY(-2px);
-        }
-
-        .submit-btn:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-            transform: none;
+        /* RETINA SUPPORT */
+        .retina-image {
+            max-width: 100%;
+            height: auto;
         }
 
         /* RESPONSIVE DESIGN */
@@ -576,12 +567,10 @@
                 padding: 20px;
             }
 
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-
             .gallery-main {
                 min-height: 300px;
+                max-height: 400px;
+                padding: 15px;
             }
 
             .bar {
@@ -596,26 +585,21 @@
                 flex-wrap: wrap;
             }
 
-            .project {
-                grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            }
-
             .project__card {
                 max-width: 100%;
+            }
+
+            .gallery-item {
+                height: 100px;
+                padding: 8px;
             }
         }
 
         @media (max-width: 480px) {
-            .gallery-container {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-item {
-                height: 140px;
-            }
-
             .gallery-main {
                 min-height: 250px;
+                max-height: 350px;
+                padding: 10px;
             }
 
             .modal-btn {
@@ -632,48 +616,16 @@
             .nav__link {
                 padding: 12px 20px;
             }
-        }
 
-        /* DIARY PAGE SPECIFIC */
-        .diary-entry {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+            .project__text {
+                font-size: 18px;
+                padding: 15px;
+            }
 
-        .entry-date {
-            color: #2a5298;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .entry-content {
-            line-height: 1.7;
-        }
-
-        /* CONTACTS PAGE SPECIFIC */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .contact-form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            .gallery-item {
+                height: 80px;
+                padding: 6px;
+            }
         }
     </style>
 </head>
@@ -683,12 +635,14 @@
     
     <div class="container">
         <header class="header">
-            <img src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png" 
-                 alt="Логотип МИРЭА" 
-                 class="header__image"
-                 width="100"
-                 height="100"
-                 loading="lazy">
+            <!-- TECHNIQUE 4: Retina display поддержка -->
+            <img 
+                src="../images/icons/gas-kvas-com-p-gerb-mirea-na-prozrachnom-fone-17.png"
+                alt="Логотип МИРЭА" 
+                class="header__image retina-image"
+                width="100"
+                height="100"
+                loading="lazy">
             <h1 class="header__text">Дзигоев Давид Георгиевич</h1>
         </header>
 
@@ -716,51 +670,68 @@
                 <div class="line"></div>
 
                 <section class="project">
-                    <!-- Первая карточка - используем оригинальные изображения -->
+                    <!-- Первая карточка -->
                     <div class="project__card" onclick="openModal('modal1')" tabindex="0" role="button">
-                        <img 
-                            src="../images/htmlandcss.jpg" 
-                            alt="Личный сайт проект"
-                            class="project__card-img"
-                            width="320"
-                            height="220"
-                            loading="lazy">
+                        <!-- TECHNIQUE 3: Разные изображения для разных экранов + TECHNIQUE 2: Picture element -->
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="../images/htmlandcss.jpg">
+                            <source media="(min-width: 768px)" srcset="../images/htmlandcss.jpg">
+                            <img 
+                                src="../images/htmlandcss.jpg" 
+                                alt="Личный сайт проект"
+                                class="project__card-img object-fit-cover responsive-image"
+                                width="320"
+                                height="220"
+                                loading="lazy">
+                        </picture>
                         <p class="project__text">Личный сайт<br>HTML, CSS</p>
                     </div>
                     
                     <!-- Вторая карточка -->
                     <div class="project__card" onclick="openModal('modal2')" tabindex="0" role="button">
-                        <img 
-                            src="../images/todo.png" 
-                            alt="Калькулятор проект"
-                            class="project__card-img"
-                            width="320"
-                            height="220"
-                            loading="lazy">
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="../images/todo.png">
+                            <source media="(min-width: 768px)" srcset="../images/todo.png">
+                            <img 
+                                src="../images/todo.png" 
+                                alt="Калькулятор проект"
+                                class="project__card-img object-fit-cover responsive-image"
+                                width="320"
+                                height="220"
+                                loading="lazy">
+                        </picture>
                         <p class="project__text">Калькулятор<br>на Python</p>
                     </div>
                     
                     <!-- Третья карточка -->
                     <div class="project__card" onclick="openModal('modal3')" tabindex="0" role="button">
-                        <img 
-                            src="../images/shop_1.jpg" 
-                            alt="Конвертер валют проект"
-                            class="project__card-img"
-                            width="320"
-                            height="220"
-                            loading="lazy">
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="../images/shop_1.jpg">
+                            <source media="(min-width: 768px)" srcset="../images/shop_1.jpg">
+                            <img 
+                                src="../images/shop_1.jpg" 
+                                alt="Конвертер валют проект"
+                                class="project__card-img object-fit-cover responsive-image"
+                                width="320"
+                                height="220"
+                                loading="lazy">
+                        </picture>
                         <p class="project__text">Конвертер<br>валют</p>
                     </div>
                     
                     <!-- Четвертая карточка -->
                     <div class="project__card" onclick="openModal('modal4')" tabindex="0" role="button">
-                        <img 
-                            src="../images/Portfolio.png" 
-                            alt="Генератор паролей проект"
-                            class="project__card-img"
-                            width="320"
-                            height="220"
-                            loading="lazy">
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="../images/Portfolio.png">
+                            <source media="(min-width: 768px)" srcset="../images/Portfolio.png">
+                            <img 
+                                src="../images/Portfolio.png" 
+                                alt="Генератор паролей проект"
+                                class="project__card-img object-fit-cover responsive-image"
+                                width="320"
+                                height="220"
+                                loading="lazy">
+                        </picture>
                         <p class="project__text">Генератор<br>паролей</p>
                     </div>
                 </section>
@@ -781,7 +752,7 @@
                         </p>
                         <p><strong>Описание:</strong> Персональный веб-сайт с информацией обо мне, моих навыках и проектах. Включает разделы "Обо мне", "Портфолио" и "Контакты".</p>
                         
-                        <!-- ГАЛЕРЕЯ С РЕСПОНСИВНЫМИ ИЗОБРАЖЕНИЯМИ -->
+                        <!-- ГАЛЕРЕЯ - ИСПРАВЛЕНА -->
                         <div class="gallery">
                             <h3 class="gallery-title">Галерея проекта</h3>
                             <div class="gallery-main">
@@ -789,8 +760,7 @@
                                     id="main-img-1"
                                     src="../images/SITE_1.jpg"
                                     alt="Главная страница личного сайта"
-                                    width="900"
-                                    height="500"
+                                    class="object-fit-contain"
                                     loading="lazy">
                             </div>
                             <div class="gallery-container">
@@ -798,24 +768,21 @@
                                     <img 
                                         src="../images/SITE_1.jpg"
                                         alt="Главная страница"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('1', '../images/SITE_2.jpg', 'Страница портфолио', this)">
                                     <img 
                                         src="../images/SITE_2.jpg"
                                         alt="Страница портфолио"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('1', '../images/SITE_3.jpg', 'Страница контактов', this)">
                                     <img 
                                         src="../images/SITE_3.jpg"
                                         alt="Страница контактов"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                             </div>
@@ -856,8 +823,7 @@
                                     id="main-img-2"
                                     src="../images/CALC_1.jpg"
                                     alt="Интерфейс калькулятора"
-                                    width="800"
-                                    height="450"
+                                    class="object-fit-contain"
                                     loading="lazy">
                             </div>
                             <div class="gallery-container">
@@ -865,24 +831,21 @@
                                     <img 
                                         src="../images/CALC_1.jpg"
                                         alt="Интерфейс калькулятора"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('2', '../images/CALC_2.jpg', 'Код калькулятора', this)">
                                     <img 
                                         src="../images/CALC_2.jpg"
                                         alt="Код калькулятора"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('2', '../images/CALC_3.jpg', 'Пример вычислений', this)">
                                     <img 
                                         src="../images/CALC_3.jpg"
                                         alt="Пример вычислений"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                             </div>
@@ -925,8 +888,7 @@
                                     id="main-img-3"
                                     src="../images/CONV_1.jpg"
                                     alt="Интерфейс конвертера валют"
-                                    width="800"
-                                    height="450"
+                                    class="object-fit-contain"
                                     loading="lazy">
                             </div>
                             <div class="gallery-container">
@@ -934,24 +896,21 @@
                                     <img 
                                         src="../images/CONV_1.jpg"
                                         alt="Интерфейс конвертера"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('3', '../images/CONV_2.jpg', 'Адаптивная версия', this)">
                                     <img 
                                         src="../images/CONV_2.jpg"
                                         alt="Адаптивная версия"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('3', '../images/CONV_3.jpg', 'История конвертаций', this)">
                                     <img 
                                         src="../images/CONV_3.jpg"
                                         alt="История конвертаций"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                             </div>
@@ -993,8 +952,7 @@
                                     id="main-img-4"
                                     src="../images/PASS_1.jpg"
                                     alt="Интерфейс генератора паролей"
-                                    width="800"
-                                    height="450"
+                                    class="object-fit-contain"
                                     loading="lazy">
                             </div>
                             <div class="gallery-container">
@@ -1002,24 +960,21 @@
                                     <img 
                                         src="../images/PASS_1.jpg"
                                         alt="Интерфейс генератора"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('4', '../images/PASS_2.jpg', 'Настройки генерации', this)">
                                     <img 
                                         src="../images/PASS_2.jpg"
                                         alt="Настройки генерации"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                                 <div class="gallery-item" onclick="changeImage('4', '../images/PASS_3.jpg', 'Индикатор сложности', this)">
                                     <img 
                                         src="../images/PASS_3.jpg"
                                         alt="Индикатор сложности"
-                                        width="150"
-                                        height="100"
+                                        class="object-fit-contain"
                                         loading="lazy">
                                 </div>
                             </div>
@@ -1135,38 +1090,18 @@
                 });
             });
             
-            // Функции для валидации форм (для contacts.html и diary.html)
-            window.validateForm = function(formId) {
-                const form = document.getElementById(formId);
-                const inputs = form.querySelectorAll('[required]');
-                let isValid = true;
-                
-                inputs.forEach(input => {
-                    const errorElement = input.nextElementSibling;
-                    if (errorElement && errorElement.classList.contains('error-message')) {
-                        if (!input.value.trim()) {
-                            errorElement.style.display = 'block';
-                            input.parentElement.classList.add('error');
-                            isValid = false;
-                        } else {
-                            errorElement.style.display = 'none';
-                            input.parentElement.classList.remove('error');
+            // Инициализация фокуса для доступности
+            const skipLink = document.querySelector('.skip-link');
+            if (skipLink) {
+                skipLink.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const mainContent = document.getElementById('main-content');
+                        if (mainContent) {
+                            mainContent.focus();
                         }
-                    }
+                    }, 100);
                 });
-                
-                if (isValid) {
-                    const successMessage = form.querySelector('.success-message');
-                    if (successMessage) {
-                        successMessage.style.display = 'block';
-                        setTimeout(() => {
-                            successMessage.style.display = 'none';
-                        }, 5000);
-                    }
-                }
-                
-                return isValid;
-            };
+            }
         });
     </script>
 </body>
